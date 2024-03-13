@@ -101,8 +101,10 @@ void Foo()
 
 
 ## 参考资料
-本库在开发时遇到了许多问题，以下文献和项目给予了本库极大的帮助和启发，在此将它们列出并向作者致以至诚的感谢。
+本库在开发时遇到了许多问题，以下文献和项目给予了本库极大的帮助和启发，在此将它们列出并向作者致以至诚的感谢。  
+**其中，下项第一条是本项目得以面世的最根本的起源，库继它发展而来。向其作者和开源精神表达由衷的敬意。**
 
-1. [Process-Hollowing](https://github.com/m0n0ph1/Process-Hollowing) -Github m0n0ph1
-2. [Windows C++ 将外部exe加载到内存中直接运行](https://www.cppblog.com/mybios/archive/2006/11/20/15452.html) -cppblog 李锦俊(mybios)
-3. [Pipes (Interprocess Communications)](https://learn.microsoft.com/en-us/windows/win32/ipc/pipes) -Microsoft
+1. [MultipleConsoles](https://www.codeproject.com/Articles/13368/Multiple-consoles-for-a-single-application) -Zvika Ferentz
+2. [Process-Hollowing](https://github.com/m0n0ph1/Process-Hollowing) -Github m0n0ph1
+3. [Windows C++ 将外部exe加载到内存中直接运行](https://www.cppblog.com/mybios/archive/2006/11/20/15452.html) -cppblog 李锦俊(mybios)
+4. [Pipes (Interprocess Communications)](https://learn.microsoft.com/en-us/windows/win32/ipc/pipes) -Microsoft
