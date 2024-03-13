@@ -1,0 +1,5 @@
+.vscode
+build
+res/MultiConsoleHelper.exe
+res/MultiConsoleHelper.pdb
+src/ConsoleHelper/resource.hpp
