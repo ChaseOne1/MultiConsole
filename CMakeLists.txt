@@ -19,14 +19,14 @@ endif()
 
 add_subdirectory(src/ConsoleHelper)
 
-#add_library(MultiConsole STATIC)
-add_executable(MultiConsole)
+add_library(MultiConsole STATIC)
+#add_executable(MultiConsole)
 
 target_precompile_headers(MultiConsole REUSE_FROM MultiConsoleHelper)
 aux_source_directory(src/Console MultiConsoleSources)
 target_sources(MultiConsole PRIVATE ${MultiConsoleSources}
-                                    src/ConsoleHelper/CConsoleHelperFactory.cpp
-                                    src/MultiConsole.cpp)
+                                    src/ConsoleHelper/CConsoleHelperFactory.cpp)
+                                    #src/MultiConsole.cpp)
                                     
 target_compile_features(MultiConsole PUBLIC cxx_std_17)
 

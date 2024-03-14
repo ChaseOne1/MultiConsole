@@ -47,7 +47,7 @@ namespace cs
         if (_tcslen(szConsoleTitle))
             SendCommand(COMMAND_SET_TITLE, szConsoleTitle, CALC_TSTR_BYTES(szConsoleTitle));
         else
-            SendCommand(COMMAND_SET_TITLE, TEXT("ConsoleLogger"), CALC_TSTR_BYTES(TEXT("ConsoleLogger")));
+            SendCommand(COMMAND_SET_TITLE, TEXT("ConsoleLogger"));
         //set buffer size
         if (buffer_size_x != -1 && buffer_size_y != -1) {
             COORD buffer_size{ buffer_size_x, buffer_size_y };
@@ -86,6 +86,23 @@ namespace cs
         _dup2(gs_originStdout, _fileno(stdout));
         setvbuf(stdout, NULL, _IONBF, 0);
 
+        m_nConsoleFlags.bRedirecting = false;
+    }
+
+    ofstream CConsole::GetAsOfstream()
+    {
+        SendCommand(COMMAND_REDIRECT);
+
+        int hConHandle = _open_osfhandle(reinterpret_cast<intptr_t>(m_hPipe), _O_TEXT);
+
+        m_nConsoleFlags.bRedirecting = true;
+
+        return std::ofstream(_fdopen(hConHandle, "w"));
+    }
+
+    void CConsole::CancelAsOfstream()
+    {
+        WritePipe(TEXT("COMMAND_REDIRECT"));  //exit keyword
         m_nConsoleFlags.bRedirecting = false;
     }
 

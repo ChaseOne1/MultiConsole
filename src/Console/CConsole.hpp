@@ -3,6 +3,7 @@
 #include <string>
 #include <string_view>
 #include <sstream>
+#include <fstream>
 #include <windows.h>
 #include <tchar.h>
 
@@ -119,10 +120,13 @@ namespace cs
         template<typename Arg>
         CConsole &operator<<(Arg &&arg);
 
+        int printf(CONST TCHAR *format, ...);
+
         void SetAsDefaultOutput();
         void ResetAsDefaultOutput();
 
-        int printf(CONST TCHAR *format, ...);
+        std::ofstream GetAsOfstream();
+        void CancelAsOfstream();
     };
 
 
