@@ -13,6 +13,7 @@ namespace cs
 
         //Initialize some flags
         m_nConsoleFlags.bCommanding = false;
+        m_nConsoleFlags.bRedirecting = false;
 
         TCHAR logger_name[MAX_PATH];
 #ifdef DEBUG_CONSOLE
@@ -65,7 +66,7 @@ namespace cs
         }
     }
 
-    static int orgStdout = _dup(_fileno(stdout));
+    static int gs_originStdout = _dup(_fileno(stdout));
 
     void CConsole::SetAsDefaultOutput()
     {
@@ -82,7 +83,7 @@ namespace cs
     {
         WritePipe(TEXT("COMMAND_REDIRECT"));  //exit keyword
 
-        _dup2(orgStdout, _fileno(stdout));
+        _dup2(gs_originStdout, _fileno(stdout));
         setvbuf(stdout, NULL, _IONBF, 0);
 
         m_nConsoleFlags.bRedirecting = false;
