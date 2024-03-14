@@ -62,9 +62,12 @@ void Foo()
     console << COMMAND_EXIT << cs::ends;  //使用此类方法发送命令时需要使用cs::ends或cs::endl结束指令模式
 }
 ```
-### 重定向标准输出到调试窗口
-库致力于兼容多种现有的Log库，目前采用重定向标准输出的方案减轻已有项目部署本库的惩罚，支持将现有项目使用std::cout或printf等向stdout输出的内容重定向到调试窗口。  
-**受现有设计限制，在重定向之后、恢复重定向之前使用命令驱动的行为是未定义的。**
+### 标准输出重定向和文件流对象支持
+* 库致力于兼容多种现有的项目，目前采用重定向标准输出的方案减轻已有项目部署本库的惩罚，支持将现有项目使用std::cout或printf等向stdout输出的内容重定向到调试窗口。  
+* 支持从CConsole对象获取ofstream对象，向基于流的Logger模式支持
+
+
+**受现有设计限制，在重定向之后、恢复重定向之前使用命令驱动的行为是未定义的。获取到流对象的操作如是。**
 ```cpp
 void Foo()
 {
@@ -81,6 +84,13 @@ void Foo()
     printf("stdout to the stdout\n");
     console << "console output\n";
     console.printf("console output\n");
+    
+    //获取ofstream对象，如同将CConsole对象“视为”ofstream对象
+    std::ofstream ofs(console.GetAsOfstream());
+	ofs << "Hello" << std::endl;
+    //停止“视为”后，不应再操作此ofstream对象
+	console.CancelAsOfstream();
+    console.printf("After ofstream");  //OK
 }
 ```
 ### 使用注意
@@ -93,7 +103,7 @@ void Foo()
 | :--------------------: | :------: | :--------: | :-------: |
 |    对x64项目的支持     | :smiley: |            |           |
 |     对C语言的支持      |          | :thinking: |           |
-|    更多的log库支持     |          | :thinking: |           |
+|    更多的log库支持     | :smiley: |            |           |
 |    更全面的线程安全    | :smiley: |            |           |
 |     双向控制台调试     |          | :thinking: |           |
 | 内置的对format库的支持 |          | :thinking: |           |
